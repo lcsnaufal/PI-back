@@ -119,7 +119,7 @@ public class Instrumentos {
         }
     }
 
-    public static List<Instrumentos> getInstrumentos(List<Instrumentos> instrumentosList){
+    public static List<Instrumentos> getAllInstrumentos(List<Instrumentos> instrumentosList){
         return instrumentosList;
     }
 }

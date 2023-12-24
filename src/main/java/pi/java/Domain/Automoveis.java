@@ -155,7 +155,7 @@ public class Automoveis {
         }
     }
 
-    public static List<Automoveis> getAutomoveis(List<Automoveis> automoveisList){
+    public static List<Automoveis> getAllAutomoveis(List<Automoveis> automoveisList){
         return automoveisList;
     }
 }

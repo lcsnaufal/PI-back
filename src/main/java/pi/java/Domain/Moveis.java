@@ -131,7 +131,7 @@ public class Moveis {
         }
     }
 
-    public static List<Moveis> getMoveis(List<Moveis> moveisList){
+    public static List<Moveis> getAllMoveis(List<Moveis> moveisList){
         return moveisList;
     }
 }

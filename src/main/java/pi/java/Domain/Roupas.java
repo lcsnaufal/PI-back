@@ -143,7 +143,7 @@ public class Roupas {
         }
     }
 
-    public static List<Roupas> getRoupas(List<Roupas> roupasList){
+    public static List<Roupas> getAllRoupas(List<Roupas> roupasList){
         return roupasList;
     }
 }

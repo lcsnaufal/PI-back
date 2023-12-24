@@ -1,9 +1,7 @@
 package pi.java.Services;
 
 import com.sun.net.httpserver.Headers;
-import pi.java.Controllers.ProductsController;
-import pi.java.Controllers.SalesPersonController;
-import pi.java.Controllers.UserController;
+import pi.java.Controllers.*;
 import com.sun.net.httpserver.HttpServer;  // Criar um servidor
 import com.sun.net.httpserver.HttpExchange;  //  Envia a requisicao do front pro back (passa pelos caminhos)
 import com.sun.net.httpserver.HttpHandler; //
@@ -24,6 +22,11 @@ public class Servidor {
         HttpHandler SalespersonHandler = new SalesPersonController.SalesPersonHandler();
         HttpHandler UserHandler = new UserController.UserHandler();
         HttpHandler ProductsHandler = new ProductsController.ProductsHandler();
+        HttpHandler CelularesHandler = new CelularesController.CelularesHandler();
+        HttpHandler AutomoveisHandler = new AutomoveisController.AutomoveisHandler();
+        HttpHandler MoveisHandler = new MoveisController.MoveisHandler();
+        HttpHandler RoupasHandler = new RoupasController.RoupasHandler();
+        HttpHandler InstrumentosHandler = new InstrumentosController.InstrumentosHandler();
 
 
         server.createContext("/api/vendedor", exchange -> {
@@ -39,6 +42,31 @@ public class Servidor {
         server.createContext("/api/produtos", exchange -> {
             configureCorsHeaders(exchange);
             ProductsHandler.handle(exchange);
+        });
+
+        server.createContext("/api/celulares", exchange -> {
+            configureCorsHeaders(exchange);
+            CelularesHandler.handle(exchange);
+        });
+
+        server.createContext("/api/moveis", exchange -> {
+            configureCorsHeaders(exchange);
+            MoveisHandler.handle(exchange);
+        });
+
+        server.createContext("/api/roupas", exchange -> {
+            configureCorsHeaders(exchange);
+            RoupasHandler.handle(exchange);
+        });
+
+        server.createContext("/api/instrumentos", exchange -> {
+            configureCorsHeaders(exchange);
+            InstrumentosHandler.handle(exchange);
+        });
+
+        server.createContext("/api/automoveis", exchange -> {
+            configureCorsHeaders(exchange);
+            AutomoveisHandler.handle(exchange);
         });
 
         server.setExecutor(null);

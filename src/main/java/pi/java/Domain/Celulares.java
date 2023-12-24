@@ -155,7 +155,7 @@ public class Celulares {
         }
     }
 
-    public static List<Celulares> getPhones(List<Celulares> celularesList){
+    public static List<Celulares> getAllCelulares(List<Celulares> celularesList){
         return celularesList;
     }
 }
