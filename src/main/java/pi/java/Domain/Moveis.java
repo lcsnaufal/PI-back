@@ -11,19 +11,21 @@ public class Moveis {
     public String cor = "";
     public String numero = "";
     public String preco = "";
+    public String imagem = "";
 
 
     public Moveis(){
 
     }
 
-    public Moveis(String movel, String tamanho, String cor, String numero, String preco){
+    public Moveis(String movel, String tamanho, String cor, String numero, String preco, String imagem){
 
         this.movel = movel;
         this.tamanho = tamanho;
         this.cor = cor;
         this.numero = numero;
         this.preco = preco;
+        this.imagem = imagem;
     }
 
     public String getMovel(){
@@ -65,13 +67,20 @@ public class Moveis {
     public void setPreco(String preco){
         this.preco = preco;
     }
+    public String getImagem(){
+        return imagem;
+    }
+    public void setImagem(String imagem){
+        this.imagem = imagem;
+    }
 
 
 
     public JSONObject toJson(){
         JSONObject json = new JSONObject();
 
-        json.put("movel",movel);
+        json.put("imagem", imagem);
+        json.put("movel", movel);
         json.put("tamanho", tamanho);
         json.put("cor", cor);
         json.put("numero", numero);
@@ -91,7 +100,7 @@ public class Moveis {
                 JSONObject jsonFor = new JSONObject();
 
 
-
+                jsonFor.put("imagem", moveis.getImagem());
                 jsonFor.put("movel", moveis.getMovel());
                 jsonFor.put("tamanho", moveis.getTamanho());
                 jsonFor.put("cor", moveis.getCor());

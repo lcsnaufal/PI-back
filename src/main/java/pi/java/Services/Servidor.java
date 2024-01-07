@@ -22,7 +22,7 @@ public class Servidor {
         HttpHandler SalespersonHandler = new SalesPersonController.SalesPersonHandler();
         HttpHandler UserHandler = new UserController.UserHandler();
         HttpHandler ProductsHandler = new ProductsController.ProductsHandler();
-        HttpHandler CelularesHandler = new CelularesController.CelularesHandler();
+        HttpHandler EletronicosHandler = new EletronicosController.EletronicosHandler();
         HttpHandler AutomoveisHandler = new AutomoveisController.AutomoveisHandler();
         HttpHandler MoveisHandler = new MoveisController.MoveisHandler();
         HttpHandler RoupasHandler = new RoupasController.RoupasHandler();
@@ -44,9 +44,9 @@ public class Servidor {
             ProductsHandler.handle(exchange);
         });
 
-        server.createContext("/api/celulares", exchange -> {
+        server.createContext("/api/eletronicos", exchange -> {
             configureCorsHeaders(exchange);
-            CelularesHandler.handle(exchange);
+            EletronicosHandler.handle(exchange);
         });
 
         server.createContext("/api/moveis", exchange -> {

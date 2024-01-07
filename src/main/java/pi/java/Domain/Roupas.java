@@ -6,6 +6,7 @@ import java.util.List;
 
 public class Roupas {
     int id = 0;
+    public String imagem = "";
     public String marca = "";
     public String tipo = "";
     public String tamanho = "";
@@ -18,8 +19,9 @@ public class Roupas {
 
     }
 
-    public Roupas(String marca, String tipo, String tamanho, String cor, String numero, String preco){
+    public Roupas(String marca, String tipo, String tamanho, String cor, String numero, String preco, String imagem){
 
+        this.imagem = imagem;
         this.marca = marca;
         this.tipo = tipo;
         this.tamanho = tamanho;
@@ -75,12 +77,20 @@ public class Roupas {
     public void setPreco(String preco){
         this.preco = preco;
     }
+    public String getImagem(){
+        return imagem;
+    }
+    public void setImagem(String imagem){
+        this.imagem = imagem;
+    }
+
 
 
 
     public JSONObject toJson(){
         JSONObject json = new JSONObject();
 
+        json.put("imagem", imagem);
         json.put("marca",marca);
         json.put("tipo", tipo);
         json.put("tamanho", tamanho);
@@ -103,6 +113,7 @@ public class Roupas {
 
 
 
+                jsonFor.put("imagem", roupas.getImagem());
                 jsonFor.put("marca", roupas.getMarca());
                 jsonFor.put("tipo", roupas.getTipo());
                 jsonFor.put("tamanho", roupas.getTamanho());

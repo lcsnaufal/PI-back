@@ -4,8 +4,9 @@ import org.json.JSONObject;
 
 import java.util.List;
 
-public class Celulares {
-    int id = 0;
+public class Eletronicos {
+
+    public String imagem = "";
     public String marca = "";
     public String modelo = "";
     public String cor = "";
@@ -15,12 +16,13 @@ public class Celulares {
     public String preco = "";
 
 
-    public Celulares(){
+    public Eletronicos(){
 
     }
 
-    public Celulares(String marca, String modelo, String cor, String armazenamento, String tela, String numero, String preco){
+    public Eletronicos(String imagem, String marca, String modelo, String cor, String armazenamento, String tela, String numero, String preco){
 
+        this.imagem = imagem;
         this.marca = marca;
         this.modelo = modelo;
         this.cor = cor;
@@ -28,8 +30,15 @@ public class Celulares {
         this.tela = tela;
         this.numero = numero;
         this.preco = preco;
+
     }
 
+    public String getImagem() {
+        return imagem;
+    }
+    public void setImagem(String imagem) {
+        this.imagem = imagem;
+    }
     public String getMarca(){
         return marca;
     }
@@ -91,7 +100,8 @@ public class Celulares {
     public JSONObject toJson(){
         JSONObject json = new JSONObject();
 
-        json.put("marca",marca);
+        json.put("imagem", imagem);
+        json.put("marca", marca);
         json.put("modelo", modelo);
         json.put("cor", cor);
         json.put("armazenamento", armazenamento);
@@ -102,34 +112,31 @@ public class Celulares {
         return json;
     }
 
-    public JSONObject arrayToJson(List<Celulares> celularesList) {
+    public JSONObject arrayToJson(List<Eletronicos> eletronicosList) {
         JSONObject json = new JSONObject();
 
-        if (!celularesList.isEmpty()) {
+        if (!eletronicosList.isEmpty()) {
             var keyJson = 0;
 
-            for (Celulares celulares : celularesList) {
+            for (Eletronicos eletronicos : eletronicosList) {
 
                 JSONObject jsonFor = new JSONObject();
 
 
 
-                jsonFor.put("marca", celulares.getMarca());
-                jsonFor.put("modelo", celulares.getModelo());
-                jsonFor.put("cor", celulares.getCor());
-                jsonFor.put("armazenamento", celulares.getArmazenamento());
-                jsonFor.put("tela", celulares.getTela());
-                jsonFor.put("numero", celulares.getNumero());
-                jsonFor.put("preco", celulares.getPreco());
+                jsonFor.put("imagem", eletronicos.getImagem());
+                jsonFor.put("marca", eletronicos.getMarca());
+                jsonFor.put("modelo", eletronicos.getModelo());
+                jsonFor.put("cor", eletronicos.getCor());
+                jsonFor.put("armazenamento", eletronicos.getArmazenamento());
+                jsonFor.put("tela", eletronicos.getTela());
+                jsonFor.put("numero", eletronicos.getNumero());
+                jsonFor.put("preco", eletronicos.getPreco());
 
 
                 json.put(String.valueOf(keyJson), jsonFor);
 
                 keyJson++;
-
-                System.out.println(celulares.getMarca());
-
-
 
             }
             return json;
@@ -142,11 +149,11 @@ public class Celulares {
 
     }
 
-    public static Celulares getCelulares(int index, List<Celulares> celularesList){
+    public static Eletronicos getEletronicos(int index, List<Eletronicos> eletronicosList){
 
-        if(index >= 0 && index < celularesList.size())  {
+        if(index >= 0 && index < eletronicosList.size())  {
 
-            return celularesList.get(index);
+            return eletronicosList.get(index);
 
         }
 
@@ -155,8 +162,8 @@ public class Celulares {
         }
     }
 
-    public static List<Celulares> getAllCelulares(List<Celulares> celularesList){
-        return celularesList;
+    public static List<Eletronicos> getAllEletronicos(List<Eletronicos> eletronicosList){
+        return eletronicosList;
     }
 }
 

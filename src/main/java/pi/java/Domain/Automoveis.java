@@ -6,6 +6,7 @@ import java.util.List;
 
 public class Automoveis {
     int id = 0;
+    public String imagem = "";
     public String marca = "";
     public String modelo = "";
     public String ano = "";
@@ -19,7 +20,7 @@ public class Automoveis {
 
     }
 
-    public Automoveis(String marca, String modelo, String ano, String cor, String km, String numero, String preco){
+    public Automoveis(String marca, String modelo, String ano, String cor, String km, String numero, String preco, String imagem){
 
         this.marca = marca;
         this.modelo = modelo;
@@ -28,6 +29,7 @@ public class Automoveis {
         this.km = km;
         this.numero = numero;
         this.preco = preco;
+        this.imagem = imagem;
     }
 
     public String getMarca(){
@@ -69,7 +71,12 @@ public class Automoveis {
     public void setKm(String km){
         this.km = km;
     }
-
+    public String getImagem(){
+        return imagem;
+    }
+    public void setImagem(String imagem){
+        this.imagem = imagem;
+    }
     public String getNumero(){
         return numero;
     }
@@ -91,7 +98,8 @@ public class Automoveis {
     public JSONObject toJson(){
         JSONObject json = new JSONObject();
 
-        json.put("marca",marca);
+        json.put("imagem", imagem);
+        json.put("marca", marca);
         json.put("modelo", modelo);
         json.put("ano", ano);
         json.put("cor", cor);
@@ -114,6 +122,7 @@ public class Automoveis {
 
 
 
+                jsonFor.put("imagem", automoveis.getImagem());
                 jsonFor.put("marca", automoveis.getMarca());
                 jsonFor.put("modelo", automoveis.getModelo());
                 jsonFor.put("ano", automoveis.getAno());

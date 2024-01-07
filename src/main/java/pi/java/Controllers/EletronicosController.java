@@ -6,7 +6,7 @@ import com.sun.net.httpserver.HttpHandler;
 import java.io.IOException;
 import java.io.InputStream;
 
-import pi.java.Domain.Celulares;
+import pi.java.Domain.Eletronicos;
 import pi.java.Services.ResponseEndPoints;
 
 import java.util.ArrayList;
@@ -14,12 +14,12 @@ import java.util.List;
 
 import org.json.JSONObject;
 
-public class CelularesController {
+public class EletronicosController {
 
     static ResponseEndPoints res = new ResponseEndPoints();
 
-    private static List<Celulares> celularesList = new ArrayList<>();
-    public static class CelularesHandler implements HttpHandler {
+    private static List<Eletronicos> eletronicosList = new ArrayList<>();
+    public static class EletronicosHandler implements HttpHandler {
 
         @Override
         public void handle(HttpExchange exchange) throws IOException {
@@ -28,26 +28,27 @@ public class CelularesController {
 
             if ("GET".equals(exchange.getRequestMethod())){
 
-                List<Celulares> getAllFromArray = Celulares.getAllCelulares(celularesList);
+                List<Eletronicos> getAllFromArray = Eletronicos.getAllEletronicos(eletronicosList);
 
 
                 if(!getAllFromArray.isEmpty()){
 
-                    Celulares celulares = new Celulares();
+                    Eletronicos eletronicos = new Eletronicos();
 
-                    for(Celulares celularesJson : getAllFromArray){
-                        System.out.println("Marca: " + celularesJson.getMarca());
-                        System.out.println("Modelo: " + celularesJson.getModelo());
-                        System.out.println("Cpf" + celularesJson.getCor());
-                        System.out.println("Email: " + celularesJson.getArmazenamento());
-                        System.out.println("Número de telefone: " + celularesJson.getTela());
-                        System.out.println("Address: " + celularesJson.getNumero());
-                        System.out.println("Preco: " + celularesJson.getPreco());
+                    for(Eletronicos eletronicosJson : getAllFromArray){
+                        System.out.println("Imagem: " + eletronicosJson.getImagem());
+                        System.out.println("Marca: " + eletronicosJson.getMarca());
+                        System.out.println("Modelo: " + eletronicosJson.getModelo());
+                        System.out.println("Cor" + eletronicosJson.getCor());
+                        System.out.println("Armazenamento: " + eletronicosJson.getArmazenamento());
+                        System.out.println("Tela: " + eletronicosJson.getTela());
+                        System.out.println("Numero de telefone: " + eletronicosJson.getNumero());
+                        System.out.println("Preco: " + eletronicosJson.getPreco());
                         System.out.println("");
                     }
 
                     response = "Dados encontrados com sucesso";
-                    res.enviarResponseJson(exchange, celulares.arrayToJson(getAllFromArray), 200);
+                    res.enviarResponseJson(exchange, eletronicos.arrayToJson(getAllFromArray), 200);
                 }
 
                 else{
@@ -62,7 +63,8 @@ public class CelularesController {
 
                     JSONObject json = new JSONObject(new String(requestBody.readAllBytes()));
 
-                    Celulares celulares = new Celulares(
+                    Eletronicos eletronicos = new Eletronicos(
+                            json.getString("imagem"),
                             json.getString("marca"),
                             json.getString("modelo"),
                             json.getString("cor"),
@@ -72,11 +74,11 @@ public class CelularesController {
                             json.getString("preco")
                     );
 
-                    celularesList.add(celulares);
+                    eletronicosList.add(eletronicos);
 
-                    System.out.println("CelularesList contém: " + celulares.toJson());
+                    System.out.println("EletronicsList contém: " + eletronicos.toJson());
 
-                    res.enviarResponseJson(exchange, celulares.toJson(), 200);
+                    res.enviarResponseJson(exchange, eletronicos.toJson(), 200);
                 }
                 catch(Exception e){
                     String ExceptionResponse = e.toString();
@@ -88,7 +90,7 @@ public class CelularesController {
             }
 
             else if ("PUT".equals(exchange.getRequestMethod())){
-                response = "Essa e a rota de celulares - PUT";
+                response = "Essa e a rota de eletronicos - PUT";
                 res.enviarResponse(exchange, response);
             }
             else if ("DELETE".equals(exchange.getRequestMethod())){

@@ -36,6 +36,7 @@ public class MoveisController {
                     Moveis moveis = new Moveis();
 
                     for(Moveis moveisJson : getAllFromArray){
+                        System.out.println("imagem" + moveisJson.getImagem());
                         System.out.println("Movel: " + moveisJson.getMovel());
                         System.out.println("Tamanho: " + moveisJson.getTamanho());
                         System.out.println("Cor" + moveisJson.getCor());
@@ -61,6 +62,7 @@ public class MoveisController {
                     JSONObject json = new JSONObject(new String(requestBody.readAllBytes()));
 
                     Moveis moveis = new Moveis(
+                            json.getString("imagem"),
                             json.getString("movel"),
                             json.getString("tamanho"),
                             json.getString("cor"),
