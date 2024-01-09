@@ -6,15 +6,14 @@ import java.sql.SQLException;
 
 public class SqlConnection {
 
-    public Connection conectar(){
+    public static Connection Conectar(){
 
         Connection conexao = null;
 
         try{
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 
-            String url = "jdbc:sqlserver://localhost:1433;databaseName=pi;trustServerCertificate=true";    //IntegratedSecurity=true em casa
-
+            String url = "jdbc:sqlserver://localhost:1433;databaseName=teste;trustServerCertificate=true";       //TESTAR O trustServerCertificate=true se não funcionar remover, criar o banco de dados pi
             String usuario = "user";
             String senha = "123456";
 
@@ -28,19 +27,32 @@ public class SqlConnection {
         } catch(ClassNotFoundException | SQLException e){
             System.out.println("O Erro foi: " + e);
 
-        }finally {
-
-            try{
-
-                if(conexao != null && !conexao.isClosed()){
-                    conexao.close();
-                }
-
-            }catch (SQLException e) {
-                System.out.println("O Erro no finally foi: " + e);
-            }
         }
+
         return conexao;
     }
 }
 
+
+
+
+
+
+
+
+
+
+
+
+//        finally {
+//
+//            try{
+//
+//                if(conexao != null && !conexao.isClosed()){
+//                    conexao.close();
+//                }
+//
+//            }catch (SQLException e) {
+//                System.out.println("O Erro no finally foi: " + e);
+//            }
+//        }
