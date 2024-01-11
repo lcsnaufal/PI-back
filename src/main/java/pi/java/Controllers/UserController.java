@@ -4,8 +4,10 @@ import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import org.json.JSONObject;
 import pi.java.DAL.UserDal;
+import pi.java.Domain.Moveis;
 import pi.java.Domain.Users;
 import pi.java.Services.ResponseEndPoints;
+import pi.java.Services.SqlConnection;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -129,6 +131,28 @@ public class UserController {
                 response = "nao definido." + "O metodo utilizado foi: " + exchange.getRequestMethod() + " So aceitamos get, put, post e delete";
                 res.enviarResponse(exchange, response);
             }
+
+
+        }
+        public static void doGet(HttpExchange exchange) throws IOException{
+            UserDal userDal = new UserDal();
+            Users user = new Users();
+            List<Users> userArray;
+            JSONObject json;
+            String response = "";
+
+
+            try {
+                userArray = userDal.listarUsuario();
+                json = user.arrayToJson(userArray);
+
+                res.enviarResponseJson(exchange, json, 200);
+            } catch(Exception e){
+                System.out.println("o Erro foi: " + e);
+                 response = "Ocorreu um erro ao buscar os dados";
+                res.enviarResponse(exchange, response);
+            }
         }
     }
 }
+

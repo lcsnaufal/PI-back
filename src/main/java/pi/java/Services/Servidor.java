@@ -81,4 +81,17 @@ public class Servidor {
         headers.set("Access-Control-Allow-Headers", "Content-Type");
 
     }
+
+//    private void configureCorsHeaders(HttpExchange exchange){
+//        Headers headers = exchange.getResponseHeaders();
+//        String requestOrigin = exchange.getRequestHeaders().getFirst("Origin");
+//        if (requestOrigin !=null) {
+//            headers.set("Acess-Control-Allow-Origin", requestOrigin);
+//        }
+//
+//        headers.set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+//        headers.set("Access-Control-Allow-Headers", "Content-Type, Authorization");
+//        headers.set("Access-Control-Allow-Credentials", "true");
+//        headers.set("Access-Control-Max-Age", "3600");
+//    }
 }

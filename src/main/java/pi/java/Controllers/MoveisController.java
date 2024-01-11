@@ -6,13 +6,17 @@ import com.sun.net.httpserver.HttpHandler;
 import java.io.IOException;
 import java.io.InputStream;
 
+import pi.java.DAL.MoveisDal;
+import pi.java.DAL.UserDal;
 import pi.java.Domain.Moveis;
+import pi.java.Domain.Users;
 import pi.java.Services.ResponseEndPoints;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.json.JSONObject;
+import pi.java.Services.SqlConnection;
 
 public class MoveisController {
 
@@ -100,6 +104,44 @@ public class MoveisController {
             }
             else {
                 response = "nao definido." + "O metodo utilizado foi: " + exchange.getRequestMethod() + " So aceitamos get, put, post e delete";
+                res.enviarResponse(exchange, response);
+            }
+        }
+        public static void doGet(HttpExchange exchange) throws IOException{
+            MoveisDal moveisDal = new MoveisDal();
+            Moveis moveis = new Moveis();
+            List<Moveis> moveisArray;
+            JSONObject json;
+            String response = "";
+
+
+            try {
+                moveisArray = moveisDal.listarMoveis();
+                json = moveis.arrayToJson(moveisArray);
+
+                res.enviarResponseJson(exchange, json, 200);
+            } catch(Exception e){
+                System.out.println("o Erro foi: " + e);
+                response = "Ocorreu um erro ao buscar os dados";
+                res.enviarResponse(exchange, response);
+            }
+        }
+        public static void doPost(HttpExchange exchange) throws IOException{
+            MoveisDal moveisDal = new MoveisDal();
+            Moveis moveis = new Moveis();
+            List<Moveis> moveisArray;
+            JSONObject json;
+            String response = "";
+
+
+            try {
+                moveisArray = moveisDal.listarMoveis();
+                json = moveis.arrayToJson(moveisArray);
+
+                res.enviarResponseJson(exchange, json, 200);
+            } catch(Exception e){
+                System.out.println("o Erro foi: " + e);
+                response = "Ocorreu um erro ao buscar os dados";
                 res.enviarResponse(exchange, response);
             }
         }

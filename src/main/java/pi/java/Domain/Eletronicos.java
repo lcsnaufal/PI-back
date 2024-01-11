@@ -6,6 +6,7 @@ import java.util.List;
 
 public class Eletronicos {
 
+    public int id = 0;
     public String imagem = "";
     public String marca = "";
     public String modelo = "";
@@ -33,6 +34,26 @@ public class Eletronicos {
 
     }
 
+    public Eletronicos(int id, String imagem, String marca, String modelo, String cor, String armazenamento, String tela, String numero, String preco){
+
+        this.id = id;
+        this.imagem = imagem;
+        this.marca = marca;
+        this.modelo = modelo;
+        this.cor = cor;
+        this.armazenamento = armazenamento;
+        this.tela = tela;
+        this.numero = numero;
+        this.preco = preco;
+
+    }
+
+    public int getId(){
+        return id;
+    }
+    public void setId(int id){
+        this.id = id;
+    }
     public String getImagem() {
         return imagem;
     }
@@ -124,6 +145,7 @@ public class Eletronicos {
 
 
 
+                jsonFor.put("id", eletronicos.getId());
                 jsonFor.put("imagem", eletronicos.getImagem());
                 jsonFor.put("marca", eletronicos.getMarca());
                 jsonFor.put("modelo", eletronicos.getModelo());

@@ -5,7 +5,7 @@ import org.json.JSONObject;
 import java.util.List;
 
 public class Moveis {
-    int id = 0;
+    public int id = 0;
     public String movel = "";
     public String tamanho = "";
     public String cor = "";
@@ -16,6 +16,9 @@ public class Moveis {
 
     public Moveis(){
 
+    }
+    public Moveis(int id){
+        this.id = id;
     }
 
     public Moveis(String movel, String tamanho, String cor, String numero, String preco, String imagem){
@@ -28,6 +31,23 @@ public class Moveis {
         this.imagem = imagem;
     }
 
+    public Moveis(int id, String movel, String tamanho, String cor, String numero, String preco, String imagem){
+
+        this.id = id;
+        this.movel = movel;
+        this.tamanho = tamanho;
+        this.cor = cor;
+        this.numero = numero;
+        this.preco = preco;
+        this.imagem = imagem;
+    }
+
+    public int getId(){
+        return id;
+    }
+    public void setId(int id){
+        this.id = id;
+    }
     public String getMovel(){
         return movel;
     }
@@ -99,7 +119,7 @@ public class Moveis {
 
                 JSONObject jsonFor = new JSONObject();
 
-
+                jsonFor.put("id", moveis.getId());
                 jsonFor.put("imagem", moveis.getImagem());
                 jsonFor.put("movel", moveis.getMovel());
                 jsonFor.put("tamanho", moveis.getTamanho());

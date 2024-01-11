@@ -32,6 +32,25 @@ public class Automoveis {
         this.imagem = imagem;
     }
 
+    public Automoveis(int id, String marca, String modelo, String ano, String cor, String km, String numero, String preco, String imagem){
+
+        this.id = id;
+        this.marca = marca;
+        this.modelo = modelo;
+        this.ano = ano;
+        this.cor = cor;
+        this.km = km;
+        this.numero = numero;
+        this.preco = preco;
+        this.imagem = imagem;
+    }
+
+    public int getId(){
+        return id;
+    }
+    public void setId(int id){
+        this.id = id;
+    }
     public String getMarca(){
         return marca;
     }
@@ -122,7 +141,7 @@ public class Automoveis {
 
 
 
-                jsonFor.put("imagem", automoveis.getImagem());
+                jsonFor.put("id", automoveis.getId());
                 jsonFor.put("marca", automoveis.getMarca());
                 jsonFor.put("modelo", automoveis.getModelo());
                 jsonFor.put("ano", automoveis.getAno());
@@ -130,6 +149,7 @@ public class Automoveis {
                 jsonFor.put("km", automoveis.getKm());
                 jsonFor.put("numero", automoveis.getNumero());
                 jsonFor.put("preco", automoveis.getPreco());
+                jsonFor.put("imagem", automoveis.getImagem());
 
 
                 json.put(String.valueOf(keyJson), jsonFor);

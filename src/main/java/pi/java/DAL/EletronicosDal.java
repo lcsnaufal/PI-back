@@ -8,11 +8,11 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-import pi.java.Domain.Users;
+import pi.java.Domain.Eletronicos;
 
 
 
-public class UserDal {
+public class EletronicosDal {
 
     public static Connection conectar(){
 
@@ -40,20 +40,21 @@ public class UserDal {
         return conexao;
     }
 
-    //Inserir - Create
-    public int inserirUsuario(String name, String lastName, String age, String address, String email, String password, String cpf) throws SQLException{
-        String sql = "INSERT INTO Users (name, lastName, age, address, email, password, cpf) VALUES(?, ?, ?, ?, ?, ?, ?,)";
+    public int inserirEletronico(String imagem, String marca, String modelo, String cor, String armazenamento, String tela, String numero, String preco) throws SQLException{
+        String sql = "INSERT INTO Eletronicos (imagem, marca, modelo, cor, armazenamento, tela, numero, preco) VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
         int linhasAfetadas = 0;
         Connection conexao = conectar();
 
         try(PreparedStatement statement = conexao.prepareStatement(sql)){
-            statement.setString(1, name);
-            statement.setString(2, lastName);
-            statement.setString(3, age);
-            statement.setString(4, address);
-            statement.setString(5, email);
-            statement.setString(6, password);
-            statement.setString(7, cpf);
+            statement.setString(1, imagem);
+            statement.setString(2, marca);
+            statement.setString(3, modelo);
+            statement.setString(4, cor);
+            statement.setString(5, armazenamento);
+            statement.setString(5, tela);
+            statement.setString(6, numero);
+            statement.setString(6, preco);
+
 
             linhasAfetadas = statement.executeUpdate();
 
@@ -69,58 +70,59 @@ public class UserDal {
         return linhasAfetadas;
     }
 
-    public List listarUsuario() throws SQLException{
-        String sql = "SELECT * FROM Users";
+    public List listarEletronicos() throws SQLException{
+        String sql = "SELECT * FROM Eletronicos";
         ResultSet result = null;
 
-        List<Users> userArray = new ArrayList<>();
+        List<Eletronicos> eletronicosArray = new ArrayList<>();
 
 
         try(PreparedStatement statement = conectar().prepareStatement(sql)){
             result = statement.executeQuery();
 
-            System.out.println("Listagem dos usuários: ");
+            System.out.println("Listagem dos eletronicos: ");
 
             while (result.next()){
                 int id = result.getInt("id");
-                String name = result.getString("name");
-                String lastName = result.getString("lastName");
-                String age = result.getString("age");
-                String address = result.getString("address");
-                String email = result.getString("email");
-                String password = result.getString("password");
-                String cpf = result.getString("cpf");
+                String imagem = result.getString("imagem");
+                String marca = result.getString("marca");
+                String modelo = result.getString("modelo");
+                String cor = result.getString("cor");
+                String armazenamento = result.getString("armazenamento");
+                String tela = result.getString("tela");
+                String numero = result.getString("numero");
+                String preco = result.getString("preco");
 
+                Eletronicos currentMovel = new Eletronicos(id, imagem, marca, modelo, cor, armazenamento, tela, numero, preco);
 
-                Users currentUser = new Users(id, name, lastName, age, address, email, password, cpf);
-
-                userArray.add(currentUser);
+                eletronicosArray.add(currentMovel);
 
 
                 System.out.println("id: " + id);
-                System.out.println("nome: " + name);
-                System.out.println("lastName: " + lastName);
-                System.out.println("age: " + age);
-                System.out.println("address: " + address);
-                System.out.println("email: " + email);
-                System.out.println("password: " + password);
-                System.out.println("cpf: " + cpf);
-                System.out.println(" ");
+                System.out.println("imagem: " + imagem);
+                System.out.println("marca: " + marca);
+                System.out.println("modelo: " + modelo);
+                System.out.println("cor: " + cor);
+                System.out.println("armazenamento: " + armazenamento);
+                System.out.println("tela: " + armazenamento);
+                System.out.println("numero: " + numero);
+                System.out.println("preco: " + preco);
+                System.out.println("");
             }
 
             result.close();
 
-            return userArray;
+            return eletronicosArray;
 
         }catch (SQLException e){
             System.out.println("O Erro na Listagem de dados foi: " + e);
         }
 
-        return userArray;
+        return eletronicosArray;
     }
 
-    public int atualizarUsuario() throws SQLException{
-        String sql = "UPDATE Users SET nome = ?, lastName = ?, age = ?, address = ?, email = ?, password = ?, cpf = ?< WHERE id = ?";
+    public int atualizarMoveis() throws SQLException{
+        String sql = "UPDATE Moveis SET imagem = ?, marca = ?, modelo = ?, cor = ?, armazenamento = ?, tela = ?< WHERE id = ?";
         int linhasAfetadas = 0;
         try(PreparedStatement statement = conectar().prepareStatement(sql)){
 //            statement.setString(1, name);

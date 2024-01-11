@@ -28,6 +28,23 @@ public class Instrumentos {
         this.preco = preco;
     }
 
+    public Instrumentos(int id, String tipo, String cor, String numero, String preco, String imagem, String marca){
+
+        this.id = id;
+        this.imagem = imagem;
+        this.marca = marca;
+        this.tipo = tipo;
+        this.cor = cor;
+        this.numero = numero;
+        this.preco = preco;
+    }
+
+    public int getId(){
+        return id;
+    }
+    public void setId(int id){
+        this.id = id;
+    }
     public String getTipo(){
         return tipo;
     }
@@ -97,6 +114,7 @@ public class Instrumentos {
                 JSONObject jsonFor = new JSONObject();
 
 
+                jsonFor.put("id", instrumentos.getId());
                 jsonFor.put("imagem", instrumentos.getImagem());
                 jsonFor.put("marca", instrumentos.getMarca());
                 jsonFor.put("tipo", instrumentos.getTipo());

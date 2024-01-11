@@ -29,7 +29,24 @@ public class Roupas {
         this.numero = numero;
         this.preco = preco;
     }
+    public Roupas(int id, String imagem, String marca, String tipo, String tamanho, String cor, String numero, String preco){
 
+        this.id = id;
+        this.imagem = imagem;
+        this.marca = marca;
+        this.tipo = tipo;
+        this.tamanho = tamanho;
+        this.cor = cor;
+        this.numero = numero;
+        this.preco = preco;
+    }
+
+    public int getId(){
+        return id;
+    }
+    public void setId(int id){
+        this.id = id;
+    }
     public String getMarca(){
         return marca;
     }
@@ -112,7 +129,7 @@ public class Roupas {
                 JSONObject jsonFor = new JSONObject();
 
 
-
+                jsonFor.put("id", roupas.getId());
                 jsonFor.put("imagem", roupas.getImagem());
                 jsonFor.put("marca", roupas.getMarca());
                 jsonFor.put("tipo", roupas.getTipo());

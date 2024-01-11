@@ -19,6 +19,18 @@ public class Users {
     }
 
     public Users(String name, String lastName, String age, String Address, String email, String password, String cpf){
+
+        this.name = name;
+        this.lastName = lastName;
+        this.age = age;
+        this.address = address;
+        this.email = email;
+        this.password = password;
+        this.cpf = cpf;
+    }
+    public Users(int id, String name, String lastName, String age, String Address, String email, String password, String cpf){
+
+        this.id = id;
         this.name = name;
         this.lastName = lastName;
         this.age = age;
@@ -28,6 +40,12 @@ public class Users {
         this.cpf = cpf;
     }
 
+    public int getId(){
+        return id;
+    }
+    public void setId(int id){
+        this.id = id;
+    }
     public String getName(){
         return name;
     }

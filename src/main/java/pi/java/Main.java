@@ -9,10 +9,8 @@ public class Main {
 
     public static void main(String[] args) throws IOException{
 
-        SqlConnection conexao = new SqlConnection();
         Servidor servidor = new Servidor();
 
-        conexao.Conectar();
         servidor.apiServer();
     }
 }
