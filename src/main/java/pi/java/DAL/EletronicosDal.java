@@ -9,51 +9,49 @@ import java.util.ArrayList;
 import java.util.List;
 
 import pi.java.Domain.Eletronicos;
+import pi.java.Domain.Moveis;
 
 
 
 public class EletronicosDal {
 
-    public static Connection conectar(){
-
+    public Connection conectar(){
         Connection conexao = null;
 
         try{
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 
-            String url = "jdbc:sqlserver://localhost:1433;databaseName=pi;trustServerCertificate=true";       //TESTAR O trustServerCertificate=true se não funcionar remover, criar o banco de dados pi
+            String url = "jdbc:sqlserver://localhost:1433;databaseName=pi;trustServerCertificate=true";    //IntegratedSecurity=true em casa
             String usuario = "user";
             String senha = "123456";
 
             conexao = DriverManager.getConnection(url, usuario, senha);
 
             if(conexao != null){
-                System.out.println("Conexão com o banco feita com sucesso");
-                conexao.close();
                 return conexao;
             }
-        } catch(ClassNotFoundException | SQLException e){
+        }catch(ClassNotFoundException | SQLException e){
             System.out.println("O Erro foi: " + e);
-
         }
 
         return conexao;
     }
 
-    public int inserirEletronico(String imagem, String marca, String modelo, String cor, String armazenamento, String tela, String numero, String preco) throws SQLException{
-        String sql = "INSERT INTO Eletronicos (imagem, marca, modelo, cor, armazenamento, tela, numero, preco) VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
+    //Inserir - Create
+    public int inserirEletronico(String marca, String modelo, String cor, String armazenamento, String tela, String numero, String preco) throws SQLException{
+        String sql = "INSERT INTO eletronicos (marca, modelo, cor, armazenamento, tela, numero, preco) VALUES(?, ?, ?, ?, ?, ?, ?)";
         int linhasAfetadas = 0;
         Connection conexao = conectar();
 
         try(PreparedStatement statement = conexao.prepareStatement(sql)){
-            statement.setString(1, imagem);
-            statement.setString(2, marca);
-            statement.setString(3, modelo);
-            statement.setString(4, cor);
-            statement.setString(5, armazenamento);
+            statement.setString(1, marca);
+            statement.setString(2, modelo);
+            statement.setString(3, cor);
+            statement.setString(4, armazenamento);
             statement.setString(5, tela);
             statement.setString(6, numero);
-            statement.setString(6, preco);
+            statement.setString(7, preco);
+
 
 
             linhasAfetadas = statement.executeUpdate();
@@ -70,8 +68,8 @@ public class EletronicosDal {
         return linhasAfetadas;
     }
 
-    public List listarEletronicos() throws SQLException{
-        String sql = "SELECT * FROM Eletronicos";
+    public List listarEletronico() throws SQLException{
+        String sql = "SELECT * FROM eletronicos";
         ResultSet result = null;
 
         List<Eletronicos> eletronicosArray = new ArrayList<>();
@@ -84,7 +82,6 @@ public class EletronicosDal {
 
             while (result.next()){
                 int id = result.getInt("id");
-                String imagem = result.getString("imagem");
                 String marca = result.getString("marca");
                 String modelo = result.getString("modelo");
                 String cor = result.getString("cor");
@@ -93,21 +90,21 @@ public class EletronicosDal {
                 String numero = result.getString("numero");
                 String preco = result.getString("preco");
 
-                Eletronicos currentMovel = new Eletronicos(id, imagem, marca, modelo, cor, armazenamento, tela, numero, preco);
 
-                eletronicosArray.add(currentMovel);
+                Eletronicos currentEletronico = new Eletronicos(id, marca, modelo, cor, armazenamento, tela, numero, preco);
+
+                eletronicosArray.add(currentEletronico);
 
 
                 System.out.println("id: " + id);
-                System.out.println("imagem: " + imagem);
                 System.out.println("marca: " + marca);
                 System.out.println("modelo: " + modelo);
                 System.out.println("cor: " + cor);
                 System.out.println("armazenamento: " + armazenamento);
-                System.out.println("tela: " + armazenamento);
+                System.out.println("tela: " + tela);
                 System.out.println("numero: " + numero);
                 System.out.println("preco: " + preco);
-                System.out.println("");
+                System.out.println(" ");
             }
 
             result.close();
@@ -121,18 +118,20 @@ public class EletronicosDal {
         return eletronicosArray;
     }
 
-    public int atualizarMoveis() throws SQLException{
-        String sql = "UPDATE Moveis SET imagem = ?, marca = ?, modelo = ?, cor = ?, armazenamento = ?, tela = ?< WHERE id = ?";
+    public int atualizarEletronico(int id, String marca, String modelo, String cor, String armazenamento, String tela, String numero, String preco) throws SQLException{
+        String sql = "UPDATE eletronicos SET marca = ?, modelo = ?, cor = ?, armazenamento = ?, tela = ?, numero = ?, preco = ?, WHERE id = ?";
+
         int linhasAfetadas = 0;
+
         try(PreparedStatement statement = conectar().prepareStatement(sql)){
-//            statement.setString(1, name);
-//            statement.setString(2, lastName);
-//            statement.setString(3, age);
-//            statement.setString(4, address);
-//            statement.setString(5, email);
-//            statement.setString(6, password);
-//            statement.setString(7, cpf);
-//            statement.setInt(8, id);
+            statement.setString(1, marca);
+            statement.setString(2, modelo);
+            statement.setString(3, cor);
+            statement.setString(4, armazenamento);
+            statement.setString(5, tela);
+            statement.setString(6, numero);
+            statement.setString(7, preco);
+            statement.setInt(8, id);
 
             linhasAfetadas = statement.executeUpdate();
 
@@ -143,17 +142,19 @@ public class EletronicosDal {
         return linhasAfetadas;
     }
 
-    public int excluirUsuario() throws SQLException{
+    public int excluirEletronico(int id) throws SQLException{
 
-        String sql = "DELETE FROM Users WHERE id = ?";
+        String sql = "DELETE FROM eletronicos WHERE id = ?";
+
         int linhasAfetadas = 0;
 
         try(PreparedStatement statement = conectar().prepareStatement(sql)){
-//            statement.setInt(1, id);
+            statement.setInt(1, id);
 
             linhasAfetadas = statement.executeUpdate();
 
             System.out.println("Foram modificadas " + linhasAfetadas + " no banco de dados");
+
             return linhasAfetadas;
         }catch(SQLException e){
             System.out.println("O Erro na inserção de dados foi: " + e);

@@ -36,7 +36,6 @@ public class AutomoveisController {
                     Automoveis automoveis = new Automoveis();
 
                     for(Automoveis automoveisJson : getAllFromArray){
-                        System.out.println("Imagem: " + automoveisJson.getImagem());
                         System.out.println("Marca: " + automoveisJson.getMarca());
                         System.out.println("Modelo: " + automoveisJson.getModelo());
                         System.out.println("Ano: " + automoveisJson.getAno());
@@ -64,7 +63,6 @@ public class AutomoveisController {
                     JSONObject json = new JSONObject(new String(requestBody.readAllBytes()));
 
                     Automoveis automoveis = new Automoveis(
-                            json.getString("imagem"),
                             json.getString("marca"),
                             json.getString("modelo"),
                             json.getString("ano"),

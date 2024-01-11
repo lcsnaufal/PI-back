@@ -5,8 +5,7 @@ import org.json.JSONObject;
 import java.util.List;
 
 public class Instrumentos {
-    int id = 0;
-    public String imagem = "";
+    public int id = 0;
     public String marca = "";
     public String tipo = "";
     public String cor = "";
@@ -18,9 +17,8 @@ public class Instrumentos {
 
     }
 
-    public Instrumentos(String tipo, String cor, String numero, String preco, String imagem, String marca){
+    public Instrumentos(String marca, String tipo, String cor, String numero, String preco){
 
-        this.imagem = imagem;
         this.marca = marca;
         this.tipo = tipo;
         this.cor = cor;
@@ -28,16 +26,16 @@ public class Instrumentos {
         this.preco = preco;
     }
 
-    public Instrumentos(int id, String tipo, String cor, String numero, String preco, String imagem, String marca){
+    public Instrumentos(int id, String marca, String tipo, String cor, String numero, String preco){
 
         this.id = id;
-        this.imagem = imagem;
         this.marca = marca;
         this.tipo = tipo;
         this.cor = cor;
         this.numero = numero;
         this.preco = preco;
     }
+
 
     public int getId(){
         return id;
@@ -45,43 +43,7 @@ public class Instrumentos {
     public void setId(int id){
         this.id = id;
     }
-    public String getTipo(){
-        return tipo;
-    }
 
-    public void setTipo(String tipo){
-        this.tipo = tipo;
-    }
-
-    public String getCor(){
-        return cor;
-    }
-
-    public void setCor(String Cor){
-        this.cor = cor;
-    }
-
-    public String getNumero(){
-        return numero;
-    }
-
-    public void setNumero(String numero){
-        this.numero = numero;
-    }
-
-    public String getPreco(){
-        return preco;
-    }
-
-    public void setPreco(String preco){
-        this.preco = preco;
-    }
-    public String getImagem(){
-        return imagem;
-    }
-    public void setImagem(String imagem){
-        this.imagem = imagem;
-    }
     public String getMarca(){
         return marca;
     }
@@ -89,11 +51,39 @@ public class Instrumentos {
         this.marca = marca;
     }
 
+    public String getTipo(){
+        return tipo;
+    }
+    public void setTipo(String tipo){
+        this.tipo = tipo;
+    }
+
+    public String getCor(){
+        return cor;
+    }
+    public void setCor(String Cor){
+        this.cor = cor;
+    }
+
+    public String getNumero(){
+        return numero;
+    }
+    public void setNumero(String numero){
+        this.numero = numero;
+    }
+
+    public String getPreco(){
+        return preco;
+    }
+    public void setPreco(String preco){
+        this.preco = preco;
+    }
+
+
 
     public JSONObject toJson(){
         JSONObject json = new JSONObject();
 
-        json.put("imagem", imagem);
         json.put("marca", marca);
         json.put("tipo", tipo);
         json.put("cor", cor);
@@ -115,7 +105,6 @@ public class Instrumentos {
 
 
                 jsonFor.put("id", instrumentos.getId());
-                jsonFor.put("imagem", instrumentos.getImagem());
                 jsonFor.put("marca", instrumentos.getMarca());
                 jsonFor.put("tipo", instrumentos.getTipo());
                 jsonFor.put("cor", instrumentos.getCor());

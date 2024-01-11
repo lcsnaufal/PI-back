@@ -5,13 +5,13 @@ import org.json.JSONObject;
 import java.util.List;
 
 public class Moveis {
+
     public int id = 0;
     public String movel = "";
     public String tamanho = "";
     public String cor = "";
     public String numero = "";
     public String preco = "";
-    public String imagem = "";
 
 
     public Moveis(){
@@ -21,17 +21,16 @@ public class Moveis {
         this.id = id;
     }
 
-    public Moveis(String movel, String tamanho, String cor, String numero, String preco, String imagem){
+    public Moveis(String movel, String tamanho, String cor, String numero, String preco){
 
         this.movel = movel;
         this.tamanho = tamanho;
         this.cor = cor;
         this.numero = numero;
         this.preco = preco;
-        this.imagem = imagem;
     }
 
-    public Moveis(int id, String movel, String tamanho, String cor, String numero, String preco, String imagem){
+    public Moveis(int id, String movel, String tamanho, String cor, String numero, String preco){
 
         this.id = id;
         this.movel = movel;
@@ -39,7 +38,6 @@ public class Moveis {
         this.cor = cor;
         this.numero = numero;
         this.preco = preco;
-        this.imagem = imagem;
     }
 
     public int getId(){
@@ -87,19 +85,13 @@ public class Moveis {
     public void setPreco(String preco){
         this.preco = preco;
     }
-    public String getImagem(){
-        return imagem;
-    }
-    public void setImagem(String imagem){
-        this.imagem = imagem;
-    }
+
 
 
 
     public JSONObject toJson(){
         JSONObject json = new JSONObject();
 
-        json.put("imagem", imagem);
         json.put("movel", movel);
         json.put("tamanho", tamanho);
         json.put("cor", cor);
@@ -120,7 +112,6 @@ public class Moveis {
                 JSONObject jsonFor = new JSONObject();
 
                 jsonFor.put("id", moveis.getId());
-                jsonFor.put("imagem", moveis.getImagem());
                 jsonFor.put("movel", moveis.getMovel());
                 jsonFor.put("tamanho", moveis.getTamanho());
                 jsonFor.put("cor", moveis.getCor());

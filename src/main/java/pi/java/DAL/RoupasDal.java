@@ -8,12 +8,11 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-import pi.java.Domain.Moveis;
+import pi.java.Domain.Roupas;
 
 
 
-public class MoveisDal {
-
+public class RoupasDal {
 
     public Connection conectar(){
         Connection conexao = null;
@@ -33,29 +32,21 @@ public class MoveisDal {
         }catch(ClassNotFoundException | SQLException e){
             System.out.println("O Erro foi: " + e);
         }
-//        finally{
-//            try {
-//                if (conexao != null && !conexao.isClosed()){
-//                    conexao.close();
-//                }
-//            }catch(SQLException e){
-//                System.out.println("O erro no finaly foi: " + e);
-//            }
-//        }
         return conexao;
     }
 
     //Inserir - Create
-    public int inserirMovel(String movel, String tamanho, String cor, String numero, String preco) throws SQLException{
-        String sql = "INSERT INTO moveis (movel, tamanho, cor, numero, preco) VALUES(?, ?, ?, ?, ?)";
+    public int inserirRoupa(String marca, String tipo, String tamanho, String cor, String numero, String preco) throws SQLException{
+        String sql = "INSERT INTO roupas (marca, tipo, tamanho, cor, numero, preco) VALUES(?, ?, ?, ?, ?, ?)";
         int linhasAfetadas = 0;
         Connection conexao = conectar();
 
         try(PreparedStatement statement = conexao.prepareStatement(sql)){
-            statement.setString(1, movel);
-            statement.setString(2, tamanho);
-            statement.setString(3, cor);
-            statement.setString(4, numero);
+            statement.setString(1, marca);
+            statement.setString(2, tipo);
+            statement.setString(3, tamanho);
+            statement.setString(4, cor);
+            statement.setString(5, numero);
             statement.setString(5, preco);
 
             linhasAfetadas = statement.executeUpdate();
@@ -72,11 +63,11 @@ public class MoveisDal {
         return linhasAfetadas;
     }
 
-    public List listarMoveis() throws SQLException{
-        String sql = "SELECT * FROM moveis";
+    public List listarRoupas() throws SQLException{
+        String sql = "SELECT * FROM roupas";
         ResultSet result = null;
 
-        List<Moveis> moveisArray = new ArrayList<>();
+        List<Roupas> roupasArray = new ArrayList<>();
 
 
         try(PreparedStatement statement = conectar().prepareStatement(sql)){
@@ -86,20 +77,22 @@ public class MoveisDal {
 
             while (result.next()){
                 int id = result.getInt("id");
-                String movel = result.getString("movel");
+                String marca = result.getString("marca");
+                String tipo = result.getString("tipo");
                 String tamanho = result.getString("tamanho");
                 String cor = result.getString("cor");
                 String numero = result.getString("numero");
                 String preco = result.getString("preco");
 
 
-                Moveis currentMovel = new Moveis(id, movel, tamanho, cor, numero, preco);
+                Roupas currentRoupas = new Roupas(id, marca, tipo, tamanho, cor, numero, preco);
 
-                moveisArray.add(currentMovel);
+                roupasArray.add(currentRoupas);
 
 
                 System.out.println("id: " + id);
-                System.out.println("movel: " + movel);
+                System.out.println("marca: " + marca);
+                System.out.println("tipo: " + tipo);
                 System.out.println("tamanho: " + tamanho);
                 System.out.println("cor: " + cor);
                 System.out.println("numero: " + numero);
@@ -109,27 +102,28 @@ public class MoveisDal {
 
             result.close();
 
-            return moveisArray;
+            return roupasArray;
 
         }catch (SQLException e){
             System.out.println("O Erro na Listagem de dados foi: " + e);
         }
 
-        return moveisArray;
+        return roupasArray;
     }
 
-    public int atualizarMoveis(int id, String movel, String tamanho, String cor, String numero, String preco) throws SQLException{
-        String sql = "UPDATE moveis SET movel = ?, tamanho = ?, cor = ?, numero = ?, preco = ?, WHERE id = ?";
+    public int atualizarRoupas(int id, String marca, String tipo, String tamanho, String cor, String numero, String preco) throws SQLException{
+        String sql = "UPDATE roupas SET marca = ?, tipo = ?, tamanho = ?, cor = ?, numero = ?, preco = ?, WHERE id = ?";
 
         int linhasAfetadas = 0;
 
         try(PreparedStatement statement = conectar().prepareStatement(sql)){
-            statement.setString(1, movel);
-            statement.setString(2, tamanho);
-            statement.setString(3, cor);
-            statement.setString(4, numero);
-            statement.setString(5, preco);
-            statement.setInt(6, id);
+            statement.setString(1, marca);
+            statement.setString(2, tipo);
+            statement.setString(3, tamanho);
+            statement.setString(4, cor);
+            statement.setString(5, numero);
+            statement.setString(6, preco);
+            statement.setInt(7, id);
 
             linhasAfetadas = statement.executeUpdate();
 
@@ -140,9 +134,9 @@ public class MoveisDal {
         return linhasAfetadas;
     }
 
-    public int excluirMoveis(int id) throws SQLException{
+    public int excluirRoupas(int id) throws SQLException{
 
-        String sql = "DELETE FROM moveis WHERE id = ?";
+        String sql = "DELETE FROM roupas WHERE id = ?";
 
         int linhasAfetadas = 0;
 

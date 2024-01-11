@@ -36,7 +36,6 @@ public class EletronicosController {
                     Eletronicos eletronicos = new Eletronicos();
 
                     for(Eletronicos eletronicosJson : getAllFromArray){
-                        System.out.println("Imagem: " + eletronicosJson.getImagem());
                         System.out.println("Marca: " + eletronicosJson.getMarca());
                         System.out.println("Modelo: " + eletronicosJson.getModelo());
                         System.out.println("Cor" + eletronicosJson.getCor());
@@ -64,7 +63,6 @@ public class EletronicosController {
                     JSONObject json = new JSONObject(new String(requestBody.readAllBytes()));
 
                     Eletronicos eletronicos = new Eletronicos(
-                            json.getString("imagem"),
                             json.getString("marca"),
                             json.getString("modelo"),
                             json.getString("cor"),

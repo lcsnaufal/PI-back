@@ -36,7 +36,6 @@ public class RoupasController {
                     Roupas roupas = new Roupas();
 
                     for(Roupas roupasJson : getAllFromArray){
-                        System.out.println("imagem: " + roupasJson.getImagem());
                         System.out.println("marca: " + roupasJson.getMarca());
                         System.out.println("tipo: " + roupasJson.getTipo());
                         System.out.println("tamanho" + roupasJson.getTamanho());
@@ -63,7 +62,6 @@ public class RoupasController {
                     JSONObject json = new JSONObject(new String(requestBody.readAllBytes()));
 
                     Roupas roupas = new Roupas(
-                            json.getString("imagem"),
                             json.getString("marca"),
                             json.getString("tipo"),
                             json.getString("tamanho"),

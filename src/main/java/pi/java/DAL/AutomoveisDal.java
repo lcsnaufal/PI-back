@@ -8,11 +8,11 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-import pi.java.Domain.Moveis;
+import pi.java.Domain.Automoveis;
 
 
 
-public class MoveisDal {
+public class AutomoveisDal {
 
 
     public Connection conectar(){
@@ -33,30 +33,23 @@ public class MoveisDal {
         }catch(ClassNotFoundException | SQLException e){
             System.out.println("O Erro foi: " + e);
         }
-//        finally{
-//            try {
-//                if (conexao != null && !conexao.isClosed()){
-//                    conexao.close();
-//                }
-//            }catch(SQLException e){
-//                System.out.println("O erro no finaly foi: " + e);
-//            }
-//        }
         return conexao;
     }
 
     //Inserir - Create
-    public int inserirMovel(String movel, String tamanho, String cor, String numero, String preco) throws SQLException{
-        String sql = "INSERT INTO moveis (movel, tamanho, cor, numero, preco) VALUES(?, ?, ?, ?, ?)";
+    public int inserirMovel(String marca, String modelo, String ano, String cor, String km, String numero, String preco) throws SQLException{
+        String sql = "INSERT INTO automoveis (marca, modelo, ano, cor, String km, numero, preco) VALUES(?, ?, ?, ?, ?, ?, ?)";
         int linhasAfetadas = 0;
         Connection conexao = conectar();
 
         try(PreparedStatement statement = conexao.prepareStatement(sql)){
-            statement.setString(1, movel);
-            statement.setString(2, tamanho);
-            statement.setString(3, cor);
-            statement.setString(4, numero);
-            statement.setString(5, preco);
+            statement.setString(1, marca);
+            statement.setString(2, modelo);
+            statement.setString(3, ano);
+            statement.setString(4, cor);
+            statement.setString(5,km);
+            statement.setString(6, numero);
+            statement.setString(7, preco);
 
             linhasAfetadas = statement.executeUpdate();
 
@@ -72,35 +65,38 @@ public class MoveisDal {
         return linhasAfetadas;
     }
 
-    public List listarMoveis() throws SQLException{
-        String sql = "SELECT * FROM moveis";
+    public List listarAutomoveis() throws SQLException{
+        String sql = "SELECT * FROM automoveis";
         ResultSet result = null;
 
-        List<Moveis> moveisArray = new ArrayList<>();
+        List<Automoveis> automoveisArray = new ArrayList<>();
 
 
         try(PreparedStatement statement = conectar().prepareStatement(sql)){
             result = statement.executeQuery();
 
-            System.out.println("Listagem dos móveis: ");
+            System.out.println("Listagem dos automoveis: ");
 
             while (result.next()){
                 int id = result.getInt("id");
-                String movel = result.getString("movel");
-                String tamanho = result.getString("tamanho");
+                String marca = result.getString("marca");
+                String modelo = result.getString("modelo");
+                String ano = result.getString("ano");
                 String cor = result.getString("cor");
+                String km = result.getString("km");
                 String numero = result.getString("numero");
                 String preco = result.getString("preco");
 
 
-                Moveis currentMovel = new Moveis(id, movel, tamanho, cor, numero, preco);
+                Automoveis currentAutomovel = new Automoveis(id, marca, modelo, ano, cor, km, numero, preco);
 
-                moveisArray.add(currentMovel);
+                automoveisArray.add(currentAutomovel);
 
 
                 System.out.println("id: " + id);
-                System.out.println("movel: " + movel);
-                System.out.println("tamanho: " + tamanho);
+                System.out.println("marca: " + marca);
+                System.out.println("modelo: " + modelo);
+                System.out.println("ano: " + ano);
                 System.out.println("cor: " + cor);
                 System.out.println("numero: " + numero);
                 System.out.println("preco: " + preco);
@@ -109,27 +105,29 @@ public class MoveisDal {
 
             result.close();
 
-            return moveisArray;
+            return automoveisArray;
 
         }catch (SQLException e){
             System.out.println("O Erro na Listagem de dados foi: " + e);
         }
 
-        return moveisArray;
+        return automoveisArray;
     }
 
-    public int atualizarMoveis(int id, String movel, String tamanho, String cor, String numero, String preco) throws SQLException{
-        String sql = "UPDATE moveis SET movel = ?, tamanho = ?, cor = ?, numero = ?, preco = ?, WHERE id = ?";
+    public int atualizarAutomoveis(int id, String marca, String modelo, String ano, String cor, String km, String numero, String preco) throws SQLException{
+        String sql = "UPDATE automoveis SET marca = ?, modelo = ?, ano = ?, cor = ?, km = ?, numero = ?, preco = ?, WHERE id = ?";
 
         int linhasAfetadas = 0;
 
         try(PreparedStatement statement = conectar().prepareStatement(sql)){
-            statement.setString(1, movel);
-            statement.setString(2, tamanho);
-            statement.setString(3, cor);
-            statement.setString(4, numero);
-            statement.setString(5, preco);
-            statement.setInt(6, id);
+            statement.setString(1, marca);
+            statement.setString(2, modelo);
+            statement.setString(3, ano);
+            statement.setString(4, cor);
+            statement.setString(5, km);
+            statement.setString(6, numero);
+            statement.setString(7, preco);
+            statement.setInt(8, id);
 
             linhasAfetadas = statement.executeUpdate();
 
@@ -140,9 +138,9 @@ public class MoveisDal {
         return linhasAfetadas;
     }
 
-    public int excluirMoveis(int id) throws SQLException{
+    public int excluirAutomoveis(int id) throws SQLException{
 
-        String sql = "DELETE FROM moveis WHERE id = ?";
+        String sql = "DELETE FROM automoveis WHERE id = ?";
 
         int linhasAfetadas = 0;
 

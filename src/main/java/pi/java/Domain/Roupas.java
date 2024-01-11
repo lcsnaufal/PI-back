@@ -5,8 +5,7 @@ import org.json.JSONObject;
 import java.util.List;
 
 public class Roupas {
-    int id = 0;
-    public String imagem = "";
+    public int id = 0;
     public String marca = "";
     public String tipo = "";
     public String tamanho = "";
@@ -19,9 +18,8 @@ public class Roupas {
 
     }
 
-    public Roupas(String marca, String tipo, String tamanho, String cor, String numero, String preco, String imagem){
+    public Roupas(String marca, String tipo, String tamanho, String cor, String numero, String preco){
 
-        this.imagem = imagem;
         this.marca = marca;
         this.tipo = tipo;
         this.tamanho = tamanho;
@@ -29,10 +27,9 @@ public class Roupas {
         this.numero = numero;
         this.preco = preco;
     }
-    public Roupas(int id, String imagem, String marca, String tipo, String tamanho, String cor, String numero, String preco){
+    public Roupas(int id, String marca, String tipo, String tamanho, String cor, String numero, String preco){
 
         this.id = id;
-        this.imagem = imagem;
         this.marca = marca;
         this.tipo = tipo;
         this.tamanho = tamanho;
@@ -94,12 +91,7 @@ public class Roupas {
     public void setPreco(String preco){
         this.preco = preco;
     }
-    public String getImagem(){
-        return imagem;
-    }
-    public void setImagem(String imagem){
-        this.imagem = imagem;
-    }
+
 
 
 
@@ -107,7 +99,6 @@ public class Roupas {
     public JSONObject toJson(){
         JSONObject json = new JSONObject();
 
-        json.put("imagem", imagem);
         json.put("marca",marca);
         json.put("tipo", tipo);
         json.put("tamanho", tamanho);
@@ -130,7 +121,6 @@ public class Roupas {
 
 
                 jsonFor.put("id", roupas.getId());
-                jsonFor.put("imagem", roupas.getImagem());
                 jsonFor.put("marca", roupas.getMarca());
                 jsonFor.put("tipo", roupas.getTipo());
                 jsonFor.put("tamanho", roupas.getTamanho());

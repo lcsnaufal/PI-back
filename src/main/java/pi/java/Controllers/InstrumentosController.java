@@ -36,7 +36,6 @@ public class InstrumentosController {
                     Instrumentos instrumentos = new Instrumentos();
 
                     for(Instrumentos instrumentosJson : getAllFromArray){
-                        System.out.println("Imagem: " + instrumentosJson.getImagem());
                         System.out.println("Marca: " + instrumentosJson.getMarca());
                         System.out.println("Tipo: " + instrumentosJson.getTipo());
                         System.out.println("Cor: " + instrumentosJson.getCor());
@@ -62,7 +61,6 @@ public class InstrumentosController {
                     JSONObject json = new JSONObject(new String(requestBody.readAllBytes()));
 
                     Instrumentos instrumentos = new Instrumentos(
-                            json.getString("imagem"),
                             json.getString("marca"),
                             json.getString("tipo"),
                             json.getString("cor"),

@@ -21,13 +21,19 @@ import pi.java.Services.SqlConnection;
 public class MoveisController {
 
     static ResponseEndPoints res = new ResponseEndPoints();
-
     private static List<Moveis> moveisList = new ArrayList<>();
     public static class MoveisHandler implements HttpHandler {
 
         @Override
         public void handle(HttpExchange exchange) throws IOException {
 
+            if ("GET".equals(exchange.getRequestMethod())){
+                doGet(exchange);
+            } else if ("POST".equals(exchange.getRequestMethod())){
+                System.out.println("objeto criado");
+            }
+
+            //PUT E DELETE
             String response = "";
 
             if ("GET".equals(exchange.getRequestMethod())){
@@ -40,7 +46,6 @@ public class MoveisController {
                     Moveis moveis = new Moveis();
 
                     for(Moveis moveisJson : getAllFromArray){
-                        System.out.println("imagem" + moveisJson.getImagem());
                         System.out.println("Movel: " + moveisJson.getMovel());
                         System.out.println("Tamanho: " + moveisJson.getTamanho());
                         System.out.println("Cor" + moveisJson.getCor());
@@ -61,12 +66,12 @@ public class MoveisController {
 
             else if ("POST".equals(exchange.getRequestMethod())){
 
+                MoveisDal moveisDal = new MoveisDal();
                 try(InputStream requestBody = exchange.getRequestBody()){
 
                     JSONObject json = new JSONObject(new String(requestBody.readAllBytes()));
 
                     Moveis moveis = new Moveis(
-                            json.getString("imagem"),
                             json.getString("movel"),
                             json.getString("tamanho"),
                             json.getString("cor"),
@@ -76,6 +81,7 @@ public class MoveisController {
 
                     moveisList.add(moveis);
 
+                    moveisDal.inserirMovel(moveis.movel, moveis.tamanho, moveis.cor, moveis.numero, moveis.preco);
                     System.out.println("MoveisList contém: " + moveis.toJson());
 
                     res.enviarResponseJson(exchange, moveis.toJson(), 200);
@@ -110,7 +116,7 @@ public class MoveisController {
         public static void doGet(HttpExchange exchange) throws IOException{
             MoveisDal moveisDal = new MoveisDal();
             Moveis moveis = new Moveis();
-            List<Moveis> moveisArray;
+            List<Moveis> moveisArray = new ArrayList<>();
             JSONObject json;
             String response = "";
 
@@ -126,24 +132,6 @@ public class MoveisController {
                 res.enviarResponse(exchange, response);
             }
         }
-        public static void doPost(HttpExchange exchange) throws IOException{
-            MoveisDal moveisDal = new MoveisDal();
-            Moveis moveis = new Moveis();
-            List<Moveis> moveisArray;
-            JSONObject json;
-            String response = "";
 
-
-            try {
-                moveisArray = moveisDal.listarMoveis();
-                json = moveis.arrayToJson(moveisArray);
-
-                res.enviarResponseJson(exchange, json, 200);
-            } catch(Exception e){
-                System.out.println("o Erro foi: " + e);
-                response = "Ocorreu um erro ao buscar os dados";
-                res.enviarResponse(exchange, response);
-            }
-        }
     }
 }

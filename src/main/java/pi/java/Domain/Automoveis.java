@@ -5,8 +5,7 @@ import org.json.JSONObject;
 import java.util.List;
 
 public class Automoveis {
-    int id = 0;
-    public String imagem = "";
+    public int id = 0;
     public String marca = "";
     public String modelo = "";
     public String ano = "";
@@ -20,7 +19,7 @@ public class Automoveis {
 
     }
 
-    public Automoveis(String marca, String modelo, String ano, String cor, String km, String numero, String preco, String imagem){
+    public Automoveis(String marca, String modelo, String ano, String cor, String km, String numero, String preco){
 
         this.marca = marca;
         this.modelo = modelo;
@@ -29,10 +28,9 @@ public class Automoveis {
         this.km = km;
         this.numero = numero;
         this.preco = preco;
-        this.imagem = imagem;
     }
 
-    public Automoveis(int id, String marca, String modelo, String ano, String cor, String km, String numero, String preco, String imagem){
+    public Automoveis(int id, String marca, String modelo, String ano, String cor, String km, String numero, String preco){
 
         this.id = id;
         this.marca = marca;
@@ -42,7 +40,6 @@ public class Automoveis {
         this.km = km;
         this.numero = numero;
         this.preco = preco;
-        this.imagem = imagem;
     }
 
     public int getId(){
@@ -54,47 +51,32 @@ public class Automoveis {
     public String getMarca(){
         return marca;
     }
-
     public void setMarca(String marca){
         this.marca = marca;
     }
-
     public String getModelo(){
         return modelo;
     }
-
     public void setModelo(String modelo){
         this.modelo = modelo;
     }
-
     public String getAno(){
         return ano;
     }
-
     public void setAno(String ano){
         this.ano = ano;
     }
-
     public String getCor(){
         return cor;
     }
-
     public void setCor(String Cor){
         this.cor = cor;
     }
-
     public String getKm(){
         return km;
     }
-
     public void setKm(String km){
         this.km = km;
-    }
-    public String getImagem(){
-        return imagem;
-    }
-    public void setImagem(String imagem){
-        this.imagem = imagem;
     }
     public String getNumero(){
         return numero;
@@ -103,11 +85,9 @@ public class Automoveis {
     public void setNumero(String numero){
         this.numero = numero;
     }
-
     public String getPreco(){
         return preco;
     }
-
     public void setPreco(String preco){
         this.preco = preco;
     }
@@ -117,7 +97,6 @@ public class Automoveis {
     public JSONObject toJson(){
         JSONObject json = new JSONObject();
 
-        json.put("imagem", imagem);
         json.put("marca", marca);
         json.put("modelo", modelo);
         json.put("ano", ano);
@@ -149,7 +128,6 @@ public class Automoveis {
                 jsonFor.put("km", automoveis.getKm());
                 jsonFor.put("numero", automoveis.getNumero());
                 jsonFor.put("preco", automoveis.getPreco());
-                jsonFor.put("imagem", automoveis.getImagem());
 
 
                 json.put(String.valueOf(keyJson), jsonFor);
